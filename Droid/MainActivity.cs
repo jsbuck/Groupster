@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Groupster.Core;
 
 namespace Groupster.Droid
 {
@@ -16,10 +17,11 @@ namespace Groupster.Droid
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			Xamarin.FormsMaps.Init (this, bundle);
+			Xamarin.Forms.Forms.Init (this, bundle);
 
-			global::Xamarin.Forms.Forms.Init (this, bundle);
-
-			LoadApplication (new App ());
+            //LoadApplication()
+            SetPage (App.GetMainPage ());
 		}
 	}
 }

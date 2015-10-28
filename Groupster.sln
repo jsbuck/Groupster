@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Groupster", "Groupster\Groupster.csproj", "{507D72DC-6D46-4324-9CF9-4988B0A5B0A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Groupster.Droid", "Droid\Groupster.Droid.csproj", "{E6CB1C82-C0EB-446F-AE51-466DA7EFCCBD}"
@@ -23,7 +25,16 @@ Global
 		{507D72DC-6D46-4324-9CF9-4988B0A5B0A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E6CB1C82-C0EB-446F-AE51-466DA7EFCCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6CB1C82-C0EB-446F-AE51-466DA7EFCCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6CB1C82-C0EB-446F-AE51-466DA7EFCCBD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{E6CB1C82-C0EB-446F-AE51-466DA7EFCCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6CB1C82-C0EB-446F-AE51-466DA7EFCCBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.VersionControlPolicy = $1
+		$1.inheritsSet = Mono
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

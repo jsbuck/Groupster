@@ -2,12 +2,16 @@
 
 using Xamarin.Forms;
 
-namespace Groupster
+namespace Groupster.Core
 {
+
 	public class App : Application
 	{
+		static GroupsterDatabase database;
+
 		public App ()
 		{
+			/*
 			// The root page of your application
 			MainPage = new ContentPage {
 				Content = new StackLayout {
@@ -20,6 +24,21 @@ namespace Groupster
 					}
 				}
 			};
+			*/
+		}
+
+		public static GroupsterDatabase Database {
+			get { 
+				if (database == null) {
+					database = new GroupsterDatabase ();
+				}
+				return database; 
+			}
+		}
+
+		public static Page GetMainPage ()
+		{	
+			return new NavigationPage (new RootPage ());
 		}
 
 		protected override void OnStart ()
