@@ -2,7 +2,7 @@
 
 namespace Groupster.Core
 {
-	public class ImageButton : Xamarin.Forms.Labs.Controls.ImageButton
+	public class ImageButton : XLabs.Forms.Controls.ImageButton
 	{
 	}
 }

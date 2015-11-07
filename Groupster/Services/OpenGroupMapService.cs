@@ -3,7 +3,7 @@ using Groupster.Core;
 using System.Net.Http;
 using Groupster;
 using System.Threading.Tasks;
-using Xamarin.Forms.Labs.Services.Geolocation;
+using XLabs.Platform.Services.Geolocation;
 
 namespace Groupster.Core.Services
 {

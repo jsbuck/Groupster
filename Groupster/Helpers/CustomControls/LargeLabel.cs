@@ -7,7 +7,7 @@ namespace Groupster.Core
 	{
 		public LargeLabel ()
 		{
-			Font = Font.SystemFontOfSize (20);
+			this.FontSize = 20;
 			TextColor = Color.White;
 		}
 	}

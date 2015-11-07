@@ -5,16 +5,17 @@ using System.Net.Http;
 
 namespace Groupster.Core
 {
-	public class LoadingPage : ContentPage
+	public class GroupPage : ContentPage
 	{
-		public LoadingPage (RootPage rootPage)
+		public GroupPage (RootPage rootPage)
 		{
 			_rootPage = rootPage;
 			NavigationPage.SetHasNavigationBar (this, false);
 
-			//TODO : Inject ForecastService
+			//TODO : Inject Groups
+			_db = new GroupsterDatabase();
 
-			_viewModel = new LoadingViewModel (Navigation, new ForecastService (new OpenGroupMapService (new HttpClient ())), rootPage);
+			_viewModel = new GroupLoadingViewModel (Navigation, _db.GetItems<Group>(), rootPage);
 			BindingContext = _viewModel;
 
 			var statusMessageLabel = new LargeLabel {
@@ -23,7 +24,7 @@ namespace Groupster.Core
 				TextColor = Color.White,
 			};
 
-			statusMessageLabel.SetBinding<LoadingViewModel> (Label.TextProperty, vm => vm.StatusMessage);
+			statusMessageLabel.SetBinding<GroupLoadingViewModel> (Label.TextProperty, vm => vm.StatusMessage);
 
 			var stackLayout = new StackLayout {
 				HorizontalOptions = LayoutOptions.Center,
@@ -33,16 +34,16 @@ namespace Groupster.Core
 
 			var loadingImage = new Image ();
 
-			loadingImage.SetBinding<LoadingViewModel> (Image.SourceProperty, vm => vm.LoadingImage);
+			loadingImage.SetBinding<GroupLoadingViewModel> (Image.SourceProperty, vm => vm.LoadingImage);
 
 			var refreshButton = new Button{ Text = "Refresh", HorizontalOptions = LayoutOptions.Center };
 
-			refreshButton.SetBinding<LoadingViewModel> (Button.CommandProperty, vm => vm.GetForecastCommand);
-			refreshButton.SetBinding<LoadingViewModel> (VisualElement.IsVisibleProperty, vm => vm.IsRefreshButtonVisible);
+			refreshButton.SetBinding<GroupLoadingViewModel> (Button.CommandProperty, vm => vm.GetGroupCommand);
+			refreshButton.SetBinding<GroupLoadingViewModel> (VisualElement.IsVisibleProperty, vm => vm.IsRefreshButtonVisible);
 
 			var activityIndicator = new ActivityIndicator{ IsRunning = true };
 
-			activityIndicator.SetBinding<LoadingViewModel> (VisualElement.IsVisibleProperty, vm => vm.IsActivityIndicatorVisible);
+			activityIndicator.SetBinding<GroupLoadingViewModel> (VisualElement.IsVisibleProperty, vm => vm.IsActivityIndicatorVisible);
 
 			stackLayout.Children.Add (loadingImage);
 			stackLayout.Children.Add (statusMessageLabel);
@@ -57,16 +58,21 @@ namespace Groupster.Core
 			set;
 		}
 
-//		LoadingViewModel _viewModel {
-//			get;
-//			set;
-//		}
+		GroupLoadingViewModel _viewModel {
+			get;
+			set;
+		}
+
+		GroupsterDatabase _db {
+			get;
+			set;
+		}
 
 		protected override void OnDisappearing ()
 		{
 			base.OnDisappearing ();
 
-			_rootPage.NavigateTo (new EventOptionItem (), _viewModel.Forecast);
+			//_rootPage.NavigateTo (new EventOptionItem (), _viewModel.Forecast);
 		}
 
 	}

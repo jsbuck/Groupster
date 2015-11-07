@@ -48,7 +48,7 @@ namespace Groupster.Core
 			};
 
 			refreshImage.Clicked += (object sender, EventArgs e) => {
-				_rootPage.ShowLoadingDialogAsync ();
+				/*_rootPage.ShowLoadingDialogAsync ();*/
 			};
 
 			var topGrid = new Grid {RowDefinitions = new RowDefinitionCollection {

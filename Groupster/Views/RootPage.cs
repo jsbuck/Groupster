@@ -5,30 +5,23 @@ using System.Threading.Tasks;
 
 namespace Groupster.Core
 {
-	public class RootPage : MasterDetailPage
+	public class RootPage : TabbedPage
 	{
 		public RootPage ()
 		{
-			NavigationPage.SetHasNavigationBar (this, false);
+			// Hide the navigation bar for now.
+			//NavigationPage.SetHasNavigationBar (this, false);
 
-			var optionsPage = new MenuPage { Title = "Menu" };
+			// Add tabs.
+			this.Children.Add(new GroupListPage () { Title = "Groups", Icon = "" });
+			this.Children.Add (new UserListPage () { Title = "Friends", Icon = "" });
 
-			optionsPage.Menu.ItemSelected += (sender, e) => NavigateTo (e.SelectedItem as OptionItem, null);
+			setPageTitle(App.Title);
+			//this.CurrentPageChanged += OnPageChanged;
 
-			Master = optionsPage;
-			Detail = new ContentPage ();
-
-			ShowLoadingDialogAsync ();
-		}
-
-		public async Task ShowLoadingDialogAsync ()
-		{
-			var page = new LoadingPage (this);
-			await Navigation.PushModalAsync (page);
 		}
 
 		OptionItem previousItem;
-		public Forecast GroupForecast;
 
 		public void NavigateTo (OptionItem option, object parameters)
 		{
@@ -40,27 +33,45 @@ namespace Groupster.Core
 			Title = option.Title;
 
 
-			if (Device.OS == TargetPlatform.WinPhone) {
-				Detail = new ContentPage ();//work around to clear current page.
-			}
+			//Content = PageForOption (option, parameters);
 
-			Detail = PageForOption (option, parameters);
+			//IsPresented = false;
+		}
 
-			IsPresented = false;
+		void setPageTitle(string title)
+		{
+			Title = string.Format ("  {0}", title);
 		}
 
 		Page PageForOption (OptionItem option, object parameters)
 		{
-			if (option.Title == "Forecast" && parameters == null) {
-				ShowLoadingDialogAsync ();
+			if (option.Title == "Groups" && parameters == null) {
+				//ShowGroupDialogAsync ();
 				return new ContentPage ();
 			}
 
-			if (option.Title == "Forecast")
-				return new ForecastPage (this, (Forecast)parameters);
+			if (option.Title == "Groups")
+				return new ContentPage ();
 
 			throw new NotImplementedException ("Unknown menu option: " + option.Title);
 		}
+
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+
+//			if (!App.Instance.IsLoggedIn) {
+//				ShowLoginDialogAsync();
+//				//Navigation.PushModalAsync( new LoginPage(this) );
+//			}
+		}
+
+		async void OnPageChanged(object sender, EventArgs eventArgs)
+		{
+			setPageTitle(this.CurrentPage.Title);
+		}
+
+
 	}
 }
 

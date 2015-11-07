@@ -33,6 +33,24 @@ namespace Groupster.Core
 			}
 		}
 
+		public DateTime StartOn {
+			get {
+				return _startOn;
+			}
+			set {
+				_startOn = value;
+			}
+		}
+
+		public DateTime EndOn {
+			get {
+				return _endOn;
+			}
+			set {
+				_endOn = value;
+			}
+		}
+
 		public string Biography {
 			get {
 				return _biography;

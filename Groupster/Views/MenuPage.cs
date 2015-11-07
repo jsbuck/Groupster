@@ -13,7 +13,7 @@ namespace Groupster.Core
 		{
 			this.BackgroundColor = Color.FromHex ("232323");
 
-			OptionItems.Add (new ForecastOptionItem ());
+			OptionItems.Add (new EventOptionItem ());
 
 			var stackLayout = new StackLayout {
 				Spacing = 5,
@@ -27,8 +27,8 @@ namespace Groupster.Core
 				Text = "BROWSE", 
 			};
 
-			Device.OnPlatform (iOS: () => headerLabel.Font = Font.SystemFontOfSize (NamedSize.Medium),
-				Android: () => headerLabel.Font = Font.SystemFontOfSize (NamedSize.Large));
+			Device.OnPlatform (iOS: () => headerLabel.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Label)),
+				Android: () => headerLabel.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Label)));
 
 			var headerContentView = new ContentView {
 				Content = headerLabel

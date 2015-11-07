@@ -2,9 +2,9 @@
 
 namespace Groupster.Core
 {
-	public class ForecastOptionItem : OptionItem
+	public class EventOptionItem : OptionItem
 	{
-		public override string Title { get { return "Forecast"; } }
+		public override string Title { get { return "Groupster Events"; } }
 
 		//TODO change to the forecast icon
 		public override string Icon { get { return "forecast"; } }
